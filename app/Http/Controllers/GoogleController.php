@@ -28,7 +28,7 @@ class GoogleController extends Controller
 
            // Connecte l'utilisateur et redirige vers la page d'accueil
               auth()->login($user);
-         return redirect()->to('http://localhost:3000/');
+         return redirect()->to('http://localhost:3000/login/google/'.$user->api_token);
     }
 
      // Vérifie si un utilisateur avec cet ID existe déjà
