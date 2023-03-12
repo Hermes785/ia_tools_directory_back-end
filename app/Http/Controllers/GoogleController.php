@@ -28,17 +28,18 @@ class GoogleController extends Controller
 
            // Connecte l'utilisateur et redirige vers la page d'accueil
               auth()->login($user);
-         return redirect()->to('http://localhost:3000/login/google'.$user->api_token);
+         return redirect()->to('http://localhost:3000/');
     }
 
      // Vérifie si un utilisateur avec cet ID existe déjà
-         function creatuser($getInfo,$provider){
-            $user=User::where('provider_id',$getInfo->id)-first();
+         function createuser($getInfo,$provider){
+            $user=User::where('provider_id',$getInfo->id)->first();
             if(!$user){
                 $user=new User();
                 $user->name=$getInfo->name;
                  $user->email=$getInfo->email;
-                 $user->provider=$getInfo->provider;
+                 $user->provider=$provider;
+                 $user->provider_id=$getInfo->id;
                  $user->api_token=Str::random(60);
                  $user->save();
             }
